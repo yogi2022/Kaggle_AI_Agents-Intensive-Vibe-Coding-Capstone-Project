@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berean — Biblical Life Concierge</title>
+<style>
+  :root { --ink:#1d1b16; --muted:#6b665c; --line:#e7e3d8; --bg:#faf8f2; --accent:#7a5c33; --card:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Georgia,'Times New Roman',serif; background:var(--bg); color:var(--ink); }
+  header { padding:28px 24px 8px; text-align:center; }
+  header h1 { margin:0; font-size:30px; letter-spacing:.5px; }
+  header p { margin:6px 0 0; color:var(--muted); font-style:italic; }
+  .wrap { max-width:820px; margin:0 auto; padding:16px 20px 60px; }
+  .chat { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; min-height:220px; }
+  .msg { margin:10px 0; line-height:1.6; }
+  .msg.user { text-align:right; }
+  .bubble { display:inline-block; padding:10px 14px; border-radius:10px; max-width:90%; }
+  .user .bubble { background:#efe7d6; }
+  .bot .bubble { background:#f4f1e9; text-align:left; }
+  .row { display:flex; gap:8px; margin-top:14px; }
+  input[type=text]{ flex:1; padding:12px 14px; border:1px solid var(--line); border-radius:10px; font-size:16px; font-family:inherit; }
+  button { padding:12px 18px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-size:15px; cursor:pointer; font-family:inherit; }
+  button:disabled { opacity:.5; cursor:default; }
+  .plan h3 { margin:14px 0 4px; font-size:17px; }
+  .plan ul { margin:4px 0; padding-left:20px; }
+  .verse { border-left:3px solid var(--accent); padding:4px 0 4px 12px; margin:6px 0; color:#34302a; }
+  .meta { font-size:13px; color:var(--muted); margin-top:10px; font-family:Arial,sans-serif; }
+  .dash { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .pill { font-family:Arial,sans-serif; font-size:13px; background:#fff; border:1px solid var(--line); border-radius:20px; padding:6px 12px; }
+  .examples { font-family:Arial,sans-serif; font-size:13px; color:var(--muted); margin-top:10px; }
+  .examples span { cursor:pointer; text-decoration:underline; }
+  .disclaimer { font-family:Arial,sans-serif; font-size:12px; color:var(--muted); margin-top:24px; text-align:center; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Berean</h1>
+    <p>Examine everything. Be transformed.</p>
+  </header>
+  <div class="wrap">
+    <div id="chat" class="chat">
+      <div class="msg bot"><div class="bubble">Tell me what you're carrying today, and I'll walk through it with you from Scripture.</div></div>
+    </div>
+    <div class="examples">
+      Try:
+      <span onclick="useEx(this)">I feel worthless.</span> ·
+      <span onclick="useEx(this)">I'm anxious about losing my job.</span> ·
+      <span onclick="useEx(this)">I'm anxious, lost, and don't know what God wants for me.</span>
+    </div>
+    <div class="row">
+      <input id="q" type="text" placeholder="Share a struggle…" onkeydown="if(event.key==='Enter')send()">
+      <button id="send" onclick="send()">Ask</button>
+    </div>
+    <div id="dash" class="dash"></div>
+    <p class="disclaimer">Berean offers biblical guidance and is not a substitute for a pastor, licensed counselor, or medical / mental-health professional.</p>
+  </div>
+
+<script>
+const chat = document.getElementById('chat');
+function add(role, html){ const d=document.createElement('div'); d.className='msg '+role; d.innerHTML='<div class="bubble">'+html+'</div>'; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; return d; }
+function useEx(el){ document.getElementById('q').value = el.textContent; }
+function esc(s){ return (s||'').replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+function renderPlan(p){
+  if(p.raw) return esc(p.raw);
+  let h='';
+  if(p.root_cause){ h+='<h3>Root cause</h3>'+esc(p.root_cause); }
+  if(p.biblical_diagnosis){ h+='<h3>Biblical diagnosis</h3>'+esc(p.biblical_diagnosis); }
+  if(p.scriptures&&p.scriptures.length){ h+='<h3>Scripture</h3>'; p.scriptures.forEach(s=>{ h+='<div class="verse"><b>'+esc(s.reference)+'</b> — '+esc(s.text)+'</div>'; }); }
+  if(p.character_study){ h+='<h3>Character study</h3>'+esc(p.character_study); }
+  if(p.practical_steps&&p.practical_steps.length){ h+='<h3>Practical steps</h3><ul>'+p.practical_steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>'; }
+  if(p.seven_day_plan&&p.seven_day_plan.length){ h+='<h3>7-day plan</h3><ul>'+p.seven_day_plan.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>'; }
+  if(p.prayer){ h+='<h3>Prayer</h3>'+esc(p.prayer); }
+  if(p.reflection_questions&&p.reflection_questions.length){ h+='<h3>Reflection</h3><ul>'+p.reflection_questions.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>'; }
+  return '<div class="plan">'+h+'</div>';
+}
+
+function renderDash(k){
+  const d=document.getElementById('dash'); d.innerHTML='';
+  if(!k||!k.domains) return;
+  if(k.overall!=null){ const o=document.createElement('div'); o.className='pill'; o.innerHTML='<b>Kingdom Health '+k.overall+'%</b>'; d.appendChild(o); }
+  Object.entries(k.domains).forEach(([dom,sc])=>{ const p=document.createElement('div'); p.className='pill'; p.textContent=dom+' '+sc+'%'; d.appendChild(p); });
+}
+
+async function send(){
+  const q=document.getElementById('q'); const btn=document.getElementById('send');
+  const text=q.value.trim(); if(!text) return;
+  add('user', esc(text)); q.value=''; btn.disabled=true;
+  const wait=add('bot','Examining the Scriptures…');
+  try{
+    const r=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,user_id:'web-user'})});
+    const data=await r.json();
+    if(data.error){ wait.querySelector('.bubble').innerHTML=esc(data.error); }
+    else{
+      let h=renderPlan(data.plan||{});
+      if(data.citation_faithfulness){ h+='<div class="meta">Citation faithfulness: '+Math.round(data.citation_faithfulness.faithfulness*100)+'% · grounded by the Scripture MCP server</div>'; }
+      wait.querySelector('.bubble').innerHTML=h;
+      renderDash(data.kingdom_health);
+    }
+  }catch(e){ wait.querySelector('.bubble').textContent='Something went wrong: '+e; }
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>

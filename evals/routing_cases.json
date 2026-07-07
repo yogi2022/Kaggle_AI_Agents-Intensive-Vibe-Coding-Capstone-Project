@@ -1,0 +1,9 @@
+{
+  "cases": [
+    {"input": "I feel worthless and like I'm never good enough.", "expect_domains": ["identity"]},
+    {"input": "I'm so anxious about losing my job I can't sleep.", "expect_domains": ["peace"]},
+    {"input": "I don't know why I'm even here or what I'm meant to do.", "expect_domains": ["purpose"]},
+    {"input": "Should I take this job offer in another city or stay?", "expect_domains": ["decision"]},
+    {"input": "I'm anxious, I feel lost, and I don't know what God wants for me.", "expect_domains": ["peace", "purpose", "identity"]}
+  ]
+}

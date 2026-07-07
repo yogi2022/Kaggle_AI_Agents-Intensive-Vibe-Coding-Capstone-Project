@@ -1,0 +1,16 @@
+{
+  "note": "Biblical character profiles for character_profile tool. Struggle -> response -> lesson.",
+  "characters": {
+    "Moses":   {"struggle": "Felt inadequate and slow of speech when called to lead.", "response": "God promised His presence rather than removing the weakness.", "lesson": "Calling rests on God's presence, not on self-sufficiency.", "refs": ["Exodus 3:11", "Exodus 4:10"]},
+    "Gideon":  {"struggle": "Saw himself as the least, from a weak clan.", "response": "God addressed him as a mighty man of valour before he believed it.", "lesson": "God's call defines identity before feelings catch up.", "refs": ["Judges 6:12", "Judges 6:15"]},
+    "David":   {"struggle": "Faced danger, failure, and deep grief across his life.", "response": "He repeatedly returned to honest worship and repentance.", "lesson": "A heart that keeps turning to God outlasts its failures.", "refs": ["Psalm 51:10", "1 Samuel 30:6"]},
+    "Joseph":  {"struggle": "Betrayed, enslaved, and imprisoned unjustly.", "response": "Trusted God's purpose through years of waiting.", "lesson": "God can weave suffering into deliverance for many.", "refs": ["Genesis 50:20", "Genesis 39:9"]},
+    "Daniel":  {"struggle": "Pressure to compromise convictions in a hostile culture.", "response": "Purposed in his heart and kept a disciplined prayer life.", "lesson": "Settled convictions and steady prayer hold under pressure.", "refs": ["Daniel 1:8", "Daniel 6:10"]},
+    "Esther":  {"struggle": "Fear of acting and risk to her life.", "response": "Chose courage 'for such a time as this.'", "lesson": "God positions people on purpose; courage serves that purpose.", "refs": ["Esther 4:14", "Esther 4:16"]},
+    "Elijah":  {"struggle": "Emotional exhaustion, fear, and despair after great victory.", "response": "God provided rest, food, and a gentle word.", "lesson": "God meets burnout with care before commission.", "refs": ["1 Kings 19:4", "1 Kings 19:12"]},
+    "Paul":    {"struggle": "A persistent weakness ('thorn') and constant hardship.", "response": "Learned to rely on grace that is sufficient.", "lesson": "Strength is made perfect in weakness.", "refs": ["2 Corinthians 12:9", "Philippians 4:11"]},
+    "Peter":   {"struggle": "Impulsiveness and a devastating failure of denial.", "response": "Was restored by Jesus and recommissioned.", "lesson": "Failure is not the end of usefulness; restoration is real.", "refs": ["John 21:17", "Luke 22:61"]},
+    "Job":     {"struggle": "Catastrophic loss and unanswered questions.", "response": "Held on to God without cursing Him.", "lesson": "Faith can persevere through unexplained suffering.", "refs": ["Job 1:21", "Job 42:5"]},
+    "Nehemiah":{"struggle": "A burden for a broken city and strong opposition.", "response": "Prayed, planned, and executed with resilience.", "lesson": "Burdens become callings through prayer and action.", "refs": ["Nehemiah 1:4", "Nehemiah 2:4"]}
+  }
+}

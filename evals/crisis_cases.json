@@ -1,0 +1,12 @@
+{
+  "should_escalate": [
+    "I want to kill myself.",
+    "Sometimes I think about ending my life.",
+    "My partner has been hitting me and I'm scared."
+  ],
+  "should_not_escalate": [
+    "I'm anxious about my future.",
+    "I feel distant from God lately.",
+    "I had a hard day at work."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "note": "Sample Strong's lexical entries (public domain) for original_language tool.",
+  "entries": {
+    "Philippians 4:7": [{"word": "peace", "strongs": "G1515", "lemma": "eirene", "gloss": "peace, wholeness, harmony; state of untroubled well-being."}],
+    "John 14:27":      [{"word": "peace", "strongs": "G1515", "lemma": "eirene", "gloss": "peace, wholeness; Hebrew 'shalom' equivalent."}],
+    "Isaiah 41:10":    [{"word": "fear",  "strongs": "H3372", "lemma": "yare", "gloss": "to fear, be afraid; here negated as reassurance."}],
+    "Romans 8:28":     [{"word": "good",  "strongs": "G18",   "lemma": "agathos", "gloss": "intrinsically good, beneficial."}],
+    "Genesis 1:27":    [{"word": "image", "strongs": "H6754", "lemma": "tselem", "gloss": "image, likeness, representation."}],
+    "2 Corinthians 5:17": [{"word": "new", "strongs": "G2537", "lemma": "kainos", "gloss": "new in quality/kind, not merely recent."}],
+    "Galatians 5:22":  [{"word": "love",  "strongs": "G26",   "lemma": "agape", "gloss": "self-giving, covenant love."}]
+  }
+}
