@@ -119,6 +119,3 @@ Seed Scripture text is the public-domain **King James Version**. Cross-reference
 the public-domain Treasury of Scripture Knowledge pattern; lexical entries use public-domain
 Strong's data. To scale, load a full public-domain Bible (KJV/WEB). **Do not** include
 copyrighted translations (NIV, ESV). Verify each dataset's license before shipping.
-
-## ⚠️ Reminder
-Never commit API keys or secrets. Use `.env` (git-ignored) or a secrets manager.
